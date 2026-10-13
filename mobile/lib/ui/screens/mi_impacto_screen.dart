@@ -65,7 +65,7 @@ class MiImpactoScreen extends StatelessWidget {
               ),
               const SizedBox(height: 14),
               const Text(
-                'Por unir corazones y apadrinar con amor el sueño de un niño en esta Navidad.',
+                'Por unir corazones y apadrinar con amor a las comunidades y niños en esta Navidad.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 13, height: 1.4),
               ),

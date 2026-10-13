@@ -1,4 +1,4 @@
-import '../domain/models/child_story.dart';
+import '../domain/models/localidad_campana.dart';
 import '../domain/models/colecta_group.dart';
 import '../domain/models/contribution.dart';
 import '../domain/models/foundation_post.dart';
@@ -6,53 +6,54 @@ import '../domain/models/chat_message.dart';
 import 'mock_data.dart';
 
 class ColectasRepository {
-  List<ChildStory> _children = [];
+  List<LocalidadCampana> _localidades = [];
   List<ColectaGroup> _groups = [];
   List<Contribution> _contributions = [];
   List<FoundationPost> _posts = [];
   List<ChatMessage> _messages = [];
 
   ColectasRepository() {
-    _children = List.from(MockData.initialChildren);
+    _localidades = List.from(MockData.initialLocalidades);
     _groups = List.from(MockData.initialGroups);
     _contributions = List.from(MockData.initialContributions);
     _posts = List.from(MockData.initialPosts);
     _messages = List.from(MockData.initialChatMessages);
   }
 
-  Future<List<ChildStory>> getChildren() async {
-    await Future.delayed(const Duration(milliseconds: 150));
-    return List.unmodifiable(_children);
+  Future<List<LocalidadCampana>> getLocalidades() async {
+    await Future.delayed(const Duration(milliseconds: 100));
+    return List.unmodifiable(_localidades);
   }
 
   Future<List<ColectaGroup>> getGroups() async {
-    await Future.delayed(const Duration(milliseconds: 150));
+    await Future.delayed(const Duration(milliseconds: 100));
     return List.unmodifiable(_groups);
   }
 
   Future<List<Contribution>> getContributionsForGroup(String groupId) async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 80));
     return _contributions.where((c) => c.colectaId == groupId).toList();
   }
 
   Future<List<Contribution>> getAllContributions() async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 80));
     return List.unmodifiable(_contributions);
   }
 
   Future<List<FoundationPost>> getFoundationPosts() async {
-    await Future.delayed(const Duration(milliseconds: 150));
+    await Future.delayed(const Duration(milliseconds: 100));
     return List.unmodifiable(_posts);
   }
 
   Future<List<ChatMessage>> getMessagesForGroup(String groupId) async {
-    await Future.delayed(const Duration(milliseconds: 100));
+    await Future.delayed(const Duration(milliseconds: 80));
     return _messages.where((m) => m.colectaId == groupId).toList();
   }
 
   Future<ColectaGroup> createGroup({
-    required String childId,
-    required String childName,
+    required String localidadId,
+    required String localidadNombre,
+    PilarNavideno pilar = PilarNavideno.integral,
     required String nombreGrupo,
     required String organizadorNombre,
     required String organizadorEmail,
@@ -60,11 +61,13 @@ class ColectasRepository {
     required DateTime fechaLimite,
     required String descripcion,
   }) async {
-    final code = 'NAV-${DateTime.now().millisecondsSinceEpoch.toString().substring(8)}';
+    final code =
+        'NAV-${DateTime.now().millisecondsSinceEpoch.toString().substring(8)}';
     final newGroup = ColectaGroup(
       id: 'group-${DateTime.now().millisecondsSinceEpoch}',
-      childId: childId,
-      childName: childName,
+      localidadId: localidadId,
+      localidadNombre: localidadNombre,
+      pilar: pilar,
       nombreGrupo: nombreGrupo,
       organizadorNombre: organizadorNombre,
       organizadorEmail: organizadorEmail,
@@ -82,7 +85,7 @@ class ColectasRepository {
 
   Future<Contribution> addContribution({
     required String colectaId,
-    required String childId,
+    required String localidadId,
     required String donorName,
     required double amount,
     required String mensajeNavideno,
@@ -92,7 +95,7 @@ class ColectasRepository {
     final newContrib = Contribution(
       id: 'contrib-${DateTime.now().millisecondsSinceEpoch}',
       colectaId: colectaId,
-      childId: childId,
+      localidadId: localidadId,
       donorName: donorName,
       amount: amount,
       mensajeNavideno: mensajeNavideno,
@@ -104,8 +107,10 @@ class ColectasRepository {
 
     // Update group
     final gIndex = _groups.indexWhere((g) => g.id == colectaId);
+    PilarNavideno targetPilar = PilarNavideno.integral;
     if (gIndex != -1) {
       final grp = _groups[gIndex];
+      targetPilar = grp.pilar;
       final newAmt = grp.montoActual + amount;
       final parts = List<String>.from(grp.amigosParticipantes);
       if (!parts.contains(donorName) && !isAnonymous) {
@@ -117,15 +122,54 @@ class ColectasRepository {
       );
     }
 
-    // Update child story
-    final cIndex = _children.indexWhere((c) => c.id == childId);
-    if (cIndex != -1) {
-      final ch = _children[cIndex];
-      final newRecaudado = ch.montoRecaudado + amount;
-      final newStatus = newRecaudado >= ch.metaMonto ? GiftStatus.metaAlcanzada : ch.estado;
-      _children[cIndex] = ch.copyWith(
-        montoRecaudado: newRecaudado,
-        estado: newStatus,
+    // Update localidad
+    final locIndex = _localidades.indexWhere((l) => l.id == localidadId);
+    if (locIndex != -1) {
+      final loc = _localidades[locIndex];
+      double newChoco = loc.recaudadoChocolatada;
+      double newJuegos = loc.recaudadoJuegos;
+      double newJuguetes = loc.recaudadoJuguetes;
+
+      switch (targetPilar) {
+        case PilarNavideno.chocolatada:
+          newChoco += amount;
+          break;
+        case PilarNavideno.juegosShow:
+          newJuegos += amount;
+          break;
+        case PilarNavideno.juguetes:
+          newJuguetes += amount;
+          break;
+        case PilarNavideno.integral:
+          // Distribute proportionally
+          newChoco += (amount * 0.25);
+          newJuegos += (amount * 0.20);
+          newJuguetes += (amount * 0.55);
+          break;
+      }
+
+      final totalRec = newChoco + newJuegos + newJuguetes;
+      final newEstado = totalRec >= loc.metaTotal
+          ? EstadoCaravana.metaAlcanzada
+          : loc.estado;
+
+      _localidades[locIndex] = LocalidadCampana(
+        id: loc.id,
+        nombre: loc.nombre,
+        departamentoZona: loc.departamentoZona,
+        descripcionComunidad: loc.descripcionComunidad,
+        cantidadNinosEstimados: loc.cantidadNinosEstimados,
+        fechaCaravana: loc.fechaCaravana,
+        estado: newEstado,
+        emoji: loc.emoji,
+        puntoEncuentroSalida: loc.puntoEncuentroSalida,
+        necesidadesPuntuales: loc.necesidadesPuntuales,
+        metaChocolatada: loc.metaChocolatada,
+        recaudadoChocolatada: newChoco,
+        metaJuegos: loc.metaJuegos,
+        recaudadoJuegos: newJuegos,
+        metaJuguetes: loc.metaJuguetes,
+        recaudadoJuguetes: newJuguetes,
       );
     }
 

@@ -128,7 +128,7 @@ class _ColectaDetailScreenState extends State<ColectaDetailScreen>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                currentGroup.childName,
+                                currentGroup.localidadNombre,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 15,
@@ -137,10 +137,11 @@ class _ColectaDetailScreenState extends State<ColectaDetailScreen>
                               ),
                               const SizedBox(height: 2),
                               Text(
-                                'Organiza: ${currentGroup.organizadorNombre}',
+                                '${currentGroup.pilarTexto}  •  Organiza: ${currentGroup.organizadorNombre}',
                                 style: const TextStyle(
-                                  color: AppTheme.textMuted,
+                                  color: AppTheme.pineGreen,
                                   fontSize: 12,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ],

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import '../../data/colectas_repository.dart';
-import '../../domain/models/child_story.dart';
+import '../../domain/models/localidad_campana.dart';
 import '../../domain/models/colecta_group.dart';
 import '../../domain/models/contribution.dart';
 import '../../domain/models/foundation_post.dart';
@@ -15,39 +15,36 @@ class FoundationViewModel extends ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  List<ChildStory> _children = [];
+  List<LocalidadCampana> _localidades = [];
   List<ColectaGroup> _groups = [];
   List<Contribution> _allContributions = [];
   List<FoundationPost> _posts = [];
   final Map<String, List<ChatMessage>> _groupMessages = {};
 
-  // Filters
-  GiftCategory? _selectedCategory;
-  GiftCategory? get selectedCategory => _selectedCategory;
+  // Filtros
+  PilarNavideno? _selectedPilar;
+  PilarNavideno? get selectedPilar => _selectedPilar;
 
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
 
-  // Active current user profile for simulation
-  String _currentUserName = 'Yacely (Padrino)';
+  // Perfil activo de padrino simulado
+  String _currentUserName = 'Yacely (Padrino Solidario)';
   String get currentUserName => _currentUserName;
   void setCurrentUserName(String name) {
     _currentUserName = name;
     notifyListeners();
   }
 
-  List<ChildStory> get children {
-    return _children.where((child) {
-      if (_selectedCategory != null && child.categoria != _selectedCategory) {
-        return false;
-      }
+  // Lista filtrada de Localidades
+  List<LocalidadCampana> get localidades {
+    return _localidades.where((loc) {
       if (_searchQuery.isNotEmpty) {
         final q = _searchQuery.toLowerCase();
-        final matchesName = child.nombre.toLowerCase().contains(q);
-        final matchesGift = child.deseoRegalo.toLowerCase().contains(q);
-        final matchesCity = child.ciudadComunidad.toLowerCase().contains(q);
-        final matchesTags = child.tags.any((t) => t.toLowerCase().contains(q));
-        if (!matchesName && !matchesGift && !matchesCity && !matchesTags) {
+        final matchesName = loc.nombre.toLowerCase().contains(q);
+        final matchesZone = loc.departamentoZona.toLowerCase().contains(q);
+        final matchesDesc = loc.descripcionComunidad.toLowerCase().contains(q);
+        if (!matchesName && !matchesZone && !matchesDesc) {
           return false;
         }
       }
@@ -59,30 +56,42 @@ class FoundationViewModel extends ChangeNotifier {
   List<Contribution> get allContributions => _allContributions;
   List<FoundationPost> get posts => _posts;
 
-  // Statistics
+  // Estadísticas globales de impacto comunitario
   double get totalMontoRecaudadoGeneral =>
-      _children.fold(0.0, (acc, c) => acc + c.montoRecaudado);
+      _localidades.fold(0.0, (acc, l) => acc + l.recaudadoTotal);
 
   double get metaTotalCampana =>
-      _children.fold(0.0, (acc, c) => acc + c.metaMonto);
+      _localidades.fold(0.0, (acc, l) => acc + l.metaTotal);
 
-  int get totalNinosCompletados =>
-      _children.where((c) => c.montoRecaudado >= c.metaMonto).length;
+  int get totalNinosBeneficiados =>
+      _localidades.fold(0, (acc, l) => acc + l.cantidadNinosEstimados);
+
+  int get totalLocalidadesCompletadas =>
+      _localidades.where((l) => l.recaudadoTotal >= l.metaTotal).length;
 
   int get totalPadrinosActivos =>
       _allContributions.map((c) => c.donorName).toSet().length;
+
+  double get totalChocolatadaRecaudada =>
+      _localidades.fold(0.0, (acc, l) => acc + l.recaudadoChocolatada);
+
+  double get totalJuegosRecaudados =>
+      _localidades.fold(0.0, (acc, l) => acc + l.recaudadoJuegos);
+
+  double get totalJuguetesRecaudados =>
+      _localidades.fold(0.0, (acc, l) => acc + l.recaudadoJuguetes);
 
   Future<void> init() async {
     _isLoading = true;
     notifyListeners();
 
     try {
-      _children = await _repository.getChildren();
+      _localidades = await _repository.getLocalidades();
       _groups = await _repository.getGroups();
       _allContributions = await _repository.getAllContributions();
       _posts = await _repository.getFoundationPosts();
 
-      // Preload messages for each group
+      // Preload messages
       for (final g in _groups) {
         _groupMessages[g.id] = await _repository.getMessagesForGroup(g.id);
       }
@@ -92,8 +101,8 @@ class FoundationViewModel extends ChangeNotifier {
     }
   }
 
-  void setCategoryFilter(GiftCategory? cat) {
-    _selectedCategory = cat;
+  void setPilarFilter(PilarNavideno? pilar) {
+    _selectedPilar = pilar;
     notifyListeners();
   }
 
@@ -111,8 +120,9 @@ class FoundationViewModel extends ChangeNotifier {
   }
 
   Future<ColectaGroup> createNewColecta({
-    required String childId,
-    required String childName,
+    required String localidadId,
+    required String localidadNombre,
+    PilarNavideno pilar = PilarNavideno.integral,
     required String nombreGrupo,
     required String organizadorNombre,
     required String organizadorEmail,
@@ -121,8 +131,9 @@ class FoundationViewModel extends ChangeNotifier {
     required String descripcion,
   }) async {
     final grp = await _repository.createGroup(
-      childId: childId,
-      childName: childName,
+      localidadId: localidadId,
+      localidadNombre: localidadNombre,
+      pilar: pilar,
       nombreGrupo: nombreGrupo,
       organizadorNombre: organizadorNombre,
       organizadorEmail: organizadorEmail,
@@ -139,7 +150,7 @@ class FoundationViewModel extends ChangeNotifier {
 
   Future<void> addContribution({
     required String colectaId,
-    required String childId,
+    required String localidadId,
     required String donorName,
     required double amount,
     required String mensajeNavideno,
@@ -148,7 +159,7 @@ class FoundationViewModel extends ChangeNotifier {
   }) async {
     await _repository.addContribution(
       colectaId: colectaId,
-      childId: childId,
+      localidadId: localidadId,
       donorName: donorName,
       amount: amount,
       mensajeNavideno: mensajeNavideno,
@@ -157,10 +168,11 @@ class FoundationViewModel extends ChangeNotifier {
     );
 
     // Refresh state
-    _children = await _repository.getChildren();
+    _localidades = await _repository.getLocalidades();
     _groups = await _repository.getGroups();
     _allContributions = await _repository.getAllContributions();
-    _groupMessages[colectaId] = await _repository.getMessagesForGroup(colectaId);
+    _groupMessages[colectaId] =
+        await _repository.getMessagesForGroup(colectaId);
     notifyListeners();
   }
 

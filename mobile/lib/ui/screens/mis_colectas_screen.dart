@@ -201,10 +201,10 @@ class MisColectasScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 4),
                         Text(
-                          group.childName,
+                          '${group.localidadNombre}  •  ${group.pilarTexto}',
                           style: const TextStyle(
                             color: AppTheme.pineGreen,
-                            fontSize: 13,
+                            fontSize: 12.5,
                             fontWeight: FontWeight.w600,
                           ),
                         ),

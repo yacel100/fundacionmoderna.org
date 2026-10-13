@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class FestiveBadge extends StatelessWidget {
   final String text;
+  final Color? color;
   final Color backgroundColor;
   final Color textColor;
   final IconData? icon;
@@ -9,17 +10,19 @@ class FestiveBadge extends StatelessWidget {
   const FestiveBadge({
     super.key,
     required this.text,
-    required this.backgroundColor,
+    this.color,
+    this.backgroundColor = const Color(0xFFF0FDF4),
     required this.textColor,
     this.icon,
   });
 
   @override
   Widget build(BuildContext context) {
+    final bg = color ?? backgroundColor;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: bg,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(

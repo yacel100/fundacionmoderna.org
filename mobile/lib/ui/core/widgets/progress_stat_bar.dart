@@ -4,6 +4,7 @@ import '../app_theme.dart';
 class ProgressStatBar extends StatelessWidget {
   final double current;
   final double target;
+  final String? label;
   final String labelCurrent;
   final String labelTarget;
   final Color progressColor;
@@ -13,9 +14,10 @@ class ProgressStatBar extends StatelessWidget {
     super.key,
     required this.current,
     required this.target,
+    this.label,
     this.labelCurrent = 'Recaudado',
     this.labelTarget = 'Meta',
-    this.progressColor = AppTheme.emerald,
+    this.progressColor = AppTheme.pineGreen,
     this.height = 10,
   });
 
@@ -27,12 +29,23 @@ class ProgressStatBar extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        if (label != null) ...[
+          Text(
+            label!,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              color: AppTheme.textMuted,
+            ),
+          ),
+          const SizedBox(height: 4),
+        ],
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             RichText(
               text: TextSpan(
-                style: const TextStyle(color: AppTheme.textDark, fontSize: 13),
+                style: const TextStyle(color: AppTheme.textPrimary, fontSize: 13),
                 children: [
                   TextSpan(
                     text: '\$${current.toStringAsFixed(0)} ',

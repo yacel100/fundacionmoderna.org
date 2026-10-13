@@ -62,7 +62,7 @@ class _RegistrarAporteDialogState extends State<RegistrarAporteDialog> {
 
     await widget.viewModel.addContribution(
       colectaId: widget.group.id,
-      childId: widget.group.childId,
+      localidadId: widget.group.localidadId,
       donorName: _isAnonymous ? 'Amigo Anónimo' : _nameController.text.trim(),
       amount: amount,
       mensajeNavideno: _messageController.text.trim(),

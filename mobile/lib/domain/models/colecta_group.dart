@@ -1,7 +1,10 @@
+import 'localidad_campana.dart';
+
 class ColectaGroup {
   final String id;
-  final String childId;
-  final String childName;
+  final String localidadId;
+  final String localidadNombre;
+  final PilarNavideno pilar;
   final String nombreGrupo;
   final String organizadorNombre;
   final String organizadorEmail;
@@ -14,8 +17,9 @@ class ColectaGroup {
 
   const ColectaGroup({
     required this.id,
-    required this.childId,
-    required this.childName,
+    required this.localidadId,
+    required this.localidadNombre,
+    this.pilar = PilarNavideno.integral,
     required this.nombreGrupo,
     required this.organizadorNombre,
     required this.organizadorEmail,
@@ -27,13 +31,18 @@ class ColectaGroup {
     this.amigosParticipantes = const [],
   });
 
+  // Getters de conveniencia
+  String get childId => localidadId;
+  String get childName => localidadNombre;
+
   double get porcentajeAvance {
     if (metaGrupo <= 0) return 0;
     final p = montoActual / metaGrupo;
     return p > 1.0 ? 1.0 : p;
   }
 
-  double get restante => (metaGrupo - montoActual) > 0 ? metaGrupo - montoActual : 0.0;
+  double get restante =>
+      (metaGrupo - montoActual) > 0 ? metaGrupo - montoActual : 0.0;
 
   bool get estaCompletada => montoActual >= metaGrupo;
 
@@ -42,14 +51,28 @@ class ColectaGroup {
     return diff < 0 ? 0 : diff;
   }
 
+  String get pilarTexto {
+    switch (pilar) {
+      case PilarNavideno.chocolatada:
+        return '☕ Chocolatada & Panetón';
+      case PilarNavideno.juegosShow:
+        return '🎪 Juegos & Show';
+      case PilarNavideno.juguetes:
+        return '🎁 Lote de Juguetes';
+      case PilarNavideno.integral:
+        return '🎄 Fiesta Navideña Completa';
+    }
+  }
+
   ColectaGroup copyWith({
     double? montoActual,
     List<String>? amigosParticipantes,
   }) {
     return ColectaGroup(
       id: id,
-      childId: childId,
-      childName: childName,
+      localidadId: localidadId,
+      localidadNombre: localidadNombre,
+      pilar: pilar,
       nombreGrupo: nombreGrupo,
       organizadorNombre: organizadorNombre,
       organizadorEmail: organizadorEmail,

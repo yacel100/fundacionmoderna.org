@@ -7,7 +7,7 @@ enum PaymentMethod {
 class Contribution {
   final String id;
   final String colectaId;
-  final String childId;
+  final String localidadId;
   final String donorName;
   final String? donorEmail;
   final double amount;
@@ -19,7 +19,7 @@ class Contribution {
   const Contribution({
     required this.id,
     required this.colectaId,
-    required this.childId,
+    required this.localidadId,
     required this.donorName,
     this.donorEmail,
     required this.amount,
@@ -28,6 +28,8 @@ class Contribution {
     required this.metodo,
     this.isAnonymous = false,
   });
+
+  String get childId => localidadId;
 
   String get metodoTexto {
     switch (metodo) {
