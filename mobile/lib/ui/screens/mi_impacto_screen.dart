@@ -60,7 +60,7 @@ class MiImpactoScreen extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: AppTheme.rubyRed,
+                  color: AppTheme.modernaGreen,
                 ),
               ),
               const SizedBox(height: 14),
@@ -139,7 +139,7 @@ class MiImpactoScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [AppTheme.pineGreen, Color(0xFF14532D)],
+                    colors: [AppTheme.rubyRed, AppTheme.brightRuby],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -202,7 +202,7 @@ class MiImpactoScreen extends StatelessWidget {
                       title: 'Regalos Apoyados',
                       value: '${myContribs.length}',
                       icon: Icons.card_giftcard,
-                      color: AppTheme.emerald,
+                      color: AppTheme.pineGreen,
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -255,7 +255,7 @@ class MiImpactoScreen extends StatelessWidget {
                             TextButton(
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,
-                                foregroundColor: AppTheme.pineGreen,
+                                foregroundColor: AppTheme.rubyRed,
                               ),
                               onPressed: () => _showCertificateModal(context),
                               child: const Text('Ver y Descargar Certificado →'),

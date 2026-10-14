@@ -74,7 +74,7 @@ class _MainNavigationScaffoldState extends State<MainNavigationScaffold> {
           currentIndex: _currentIndex,
           onTap: (index) => setState(() => _currentIndex = index),
           backgroundColor: Colors.white,
-          selectedItemColor: AppTheme.pineGreen,
+          selectedItemColor: AppTheme.rubyRed,
           unselectedItemColor: AppTheme.textMuted,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
           unselectedLabelStyle: const TextStyle(fontSize: 11),

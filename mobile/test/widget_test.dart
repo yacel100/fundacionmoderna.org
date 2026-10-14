@@ -15,7 +15,7 @@ void main() {
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 200));
 
-    expect(find.text('Fundación Moderna'), findsOneWidget);
+    expect(find.textContaining('Fundación moderna', findRichText: true), findsWidgets);
     expect(find.text('Explorar'), findsOneWidget);
     expect(find.text('Colectas'), findsOneWidget);
   });

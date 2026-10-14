@@ -49,7 +49,7 @@ class MisColectasScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Color(0xFF0F5132), Color(0xFF166534)],
+                          colors: [AppTheme.pineGreen, Color(0xFF1B4332)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -77,7 +77,7 @@ class MisColectasScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
-                                  '${groups.length} grupos activos uniendo amigos para hacer sonreír a un niño esta Navidad.',
+                                  '${groups.length} grupos activos uniendo amigos para la chocolatada, juegos y juguetes.',
                                   style: const TextStyle(
                                     color: Colors.white70,
                                     fontSize: 12,

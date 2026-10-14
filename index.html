@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <!-- SEO Best Practices -->
+  <title>Fundación Moderna - Misión Navidad | Colectas Solidarias y Alegría Infantil</title>
+  <meta name="description" content="Página oficial de Fundación Moderna. Coordinamos la Caravana Navideña comunitaria: chocolatadas, shows infantiles y juguetes para niños en comunidades vulnerables mediante colectas transparentes entre amigos.">
+  <meta name="keywords" content="Fundación Moderna, Misión Navidad, colectas solidarias, chocolatada navideña, juguetes niños, donaciones transparentes, navidad comunitaria">
+  <meta name="author" content="Fundación Moderna">
+  
+  <!-- Open Graph / Redes Sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fundación Moderna - Misión Navidad">
+  <meta property="og:description" content="Llevamos alegría, chocolatadas calientes y juguetes a comunidades vulnerables. ¡Organiza una colecta con tus amigos!">
+  <meta property="og:image" content="assets/images/hero_banner.jpg">
+  <meta property="og:url" content="https://fundacionmoderna.org/">
+
+  <!-- Google Fonts & Stylesheet -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Lienzo de Nieve y Destellos Dorados -->
+  <canvas id="snow-canvas" aria-hidden="true"></canvas>
+
+  <!-- ==========================================================================
+       NAVBAR SUPERIOR FESTIVA
+       ========================================================================== -->
+  <header>
+    <nav class="navbar" id="navbar" aria-label="Navegación principal">
+      <div class="container nav-container">
+        <a href="#inicio" class="nav-brand" aria-label="Inicio Fundación Moderna">
+          <img src="assets/images/logo_moderna.gif" alt="Fundación Moderna" style="height: 38px; border-radius: 6px;">
+          <span class="brand-badge">Misión Navidad 🎁</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+          <li><a href="#nosotros" class="nav-link">Quiénes Somos</a></li>
+          <li><a href="#pilares" class="nav-link">Los 3 Pilares</a></li>
+          <li><a href="#localidades" class="nav-link">Comunidades</a></li>
+          <li><a href="#como-funciona" class="nav-link">Colectas Amigos</a></li>
+          <li><a href="#transparencia" class="nav-link">Transparencia</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a href="#donar" class="btn btn-primary" data-open-modal id="nav-donate-btn">
+            ❤️ Sumar mi Aporte
+          </a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION - DISEÑO FESTIVO CON PALETA ROJO RUBÍ & DORADO
+         ========================================================================== -->
+    <section class="hero" id="inicio" aria-labelledby="hero-heading">
+      <div class="hero-bg-overlay" aria-hidden="true"></div>
+
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge-tag">
+            <span>⭐ Caravana Solidaria Navideña 2026</span>
+          </div>
+
+          <h1 class="hero-title" id="hero-heading">
+            Llevamos la <span class="highlight-gold">Magia y Esperanza</span> de la Navidad a Cada Rincón.
+          </h1>
+
+          <p class="hero-subtitle">
+            En <strong>Fundación Moderna</strong> unimos a familias, amigos y empresas solidarias para financiar chocolatadas calientes, espectáculos recreativos y lotes de juguetes nuevos para comunidades infantiles vulnerables.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#localidades" class="btn btn-gold" id="hero-cta-explore">
+              🎄 Explorar Localidades 2026
+            </a>
+            <a href="#como-funciona" class="btn btn-glass" id="hero-cta-group">
+              👥 Crear Colecta con Amigos
+            </a>
+          </div>
+
+          <!-- Estadísticas Rápidas en Vivo -->
+          <div class="hero-stats-card">
+            <div class="stat-item">
+              <span class="stat-number" data-target="380" data-prefix="+">+380</span>
+              <span class="stat-label">Niños Beneficiados</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="3" data-prefix="">3</span>
+              <span class="stat-label">Comunidades</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number" data-target="100" data-suffix="%">100%</span>
+              <span class="stat-label">Transparencia</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta Hero Festiva Derecha -->
+        <div class="hero-card-container">
+          <div class="hero-card-festive">
+            <div class="card-header-tag">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--crimson-primary);">Meta Comunitaria Activa</span>
+              <span class="card-badge-status">● En Recaudación</span>
+            </div>
+
+            <div class="card-target-text">Comunidad San Antonio</div>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+              Chocolatada, show infantil y juguetes para 120 niños del sector rural.
+            </p>
+
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 78%;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; font-weight: 700; margin-bottom: 1.25rem;">
+              <span style="color: var(--crimson-primary);">$1,450 Recaudado</span>
+              <span style="color: var(--text-muted);">Meta: $1,850 (78%)</span>
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-primary" style="flex: 1; font-size: 0.85rem; padding: 10px;" data-open-modal id="hero-card-donate">
+                🎁 Aportar a esta Causa
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         QUIÉNES SOMOS & ÉTICA DE PROTECCIÓN INFANTIL
+         ========================================================================== -->
+    <section class="section section-bg-white" id="nosotros">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-pretitle">Quiénes Somos</span>
+          <h2 class="section-title">Sembrando sonrisas con dignidad y transparencia</h2>
+          <p class="section-desc">
+            Fundación Moderna nace con la convicción de que la solidaridad se potencia cuando amigos y familias se organizan en equipo.
+          </p>
+        </div>
+
+        <!-- Banner Ético de Protección de Menores -->
+        <div class="ethics-banner">
+          <div class="ethics-icon" aria-hidden="true">🛡️</div>
+          <div class="ethics-content">
+            <h3>Compromiso Sagrado: Protección y Dignidad Infantil</h3>
+            <p>
+              Por ética y respeto a los derechos universales de la niñez, <strong>Fundación Moderna NO publica rostros de niños vulnerables ni expone sus historias individuales</strong> con fines promocionales. Nuestras campañas se organizan de forma comunitaria por <em>Localidades</em>, asegurando que todos los niños reciban exactamente la misma alegría sin discriminación ni sensacionalismo.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         LOS 3 PILARES NAVIDEÑOS
+         ========================================================================== -->
+    <section class="section" id="pilares">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-pretitle">Nuestra Metodología</span>
+          <h2 class="section-title">Los 3 Pilares de Misión Navidad</h2>
+          <p class="section-desc">
+            Cada comunidad apadrinada recibe una experiencia integral para que cada niño y familia disfrute de una fiesta navideña completa.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          <!-- Pilar 1 -->
+          <article class="pillar-card choco">
+            <div class="pillar-icon-box" aria-hidden="true">☕</div>
+            <h3 class="pillar-title">1. Chocolatada & Panetón</h3>
+            <p class="pillar-text">
+              Chocolate caliente preparado en calderos con canela, clavo de olor y leche fresca, servido junto a porciones generosas de panetón artesanal para los niños y padres.
+            </p>
+            <ul class="pillar-features">
+              <li>Insumos de primera calidad</li>
+              <li>Raciones familiares completas</li>
+              <li>Tazas y logística sanitaria segura</li>
+            </ul>
+            <a href="#localidades" class="btn btn-outline" style="margin-top: auto;">Apoyar Chocolatadas</a>
+          </article>
+
+          <!-- Pilar 2 -->
+          <article class="pillar-card juegos">
+            <div class="pillar-icon-box" aria-hidden="true">🎪</div>
+            <h3 class="pillar-title">2. Juegos, Show & Dinámicas</h3>
+            <p class="pillar-text">
+              Un show infantil lleno de música navideña, personajes, animación profesional, concursos, bailes y piñatas para regalar un día inolvidable de recreación.
+            </p>
+            <ul class="pillar-features">
+              <li>Elenco de animación voluntaria</li>
+              <li>Música, sonido y globoflexia</li>
+              <li>Premios para dinámicas grupales</li>
+            </ul>
+            <a href="#localidades" class="btn btn-outline" style="margin-top: auto;">Apoyar Animación</a>
+          </article>
+
+          <!-- Pilar 3 -->
+          <article class="pillar-card juguetes">
+            <div class="pillar-icon-box" aria-hidden="true">🎁</div>
+            <h3 class="pillar-title">3. Lotes de Juguetes Colectivos</h3>
+            <p class="pillar-text">
+              Juguetes nuevos, seguros y clasificados cuidadosamente por rangos de edad (0-3 años, 4-7 años y 8-12 años), entregados en bolsas festivas individuales.
+            </p>
+            <ul class="pillar-features">
+              <li>Juguetes didácticos y recreativos</li>
+              <li>Clasificación por edades</li>
+              <li>Entrega ordenada y transparente</li>
+            </ul>
+            <a href="#localidades" class="btn btn-primary" style="margin-top: auto;" data-open-modal>Apadrinar Juguetes</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         LOCALIDADES Y COMUNIDADES BENEFICIARIAS 2026
+         ========================================================================== -->
+    <section class="section section-bg-white" id="localidades">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-pretitle">Hacia Dónde Vamos</span>
+          <h2 class="section-title">Localidades Beneficiarias 2026</h2>
+          <p class="section-desc">
+            Descubre las comunidades seleccionadas para la Caravana Navideña y su porcentaje de avance actual.
+          </p>
+        </div>
+
+        <div class="communities-grid">
+          <!-- Comunidad 1 -->
+          <div class="community-card">
+            <div class="community-top">
+              <div>
+                <h3 class="community-name">Comunidad San Antonio</h3>
+                <span class="community-zone">📍 Zona Rural Cordillera • 120 Niños</span>
+              </div>
+              <span class="community-kids-badge">Caravana: 20 Dic</span>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Localidad alejada con acceso limitado. Llevamos show infantil en el salón comunal y regalos para cada familia.
+            </p>
+
+            <div class="community-pillars-mini">
+              <div class="pillar-mini-row">
+                <span>☕ Chocolatada: $280 / $300</span>
+                <span style="color: var(--emerald); font-weight: bold;">93%</span>
+              </div>
+              <div class="pillar-mini-row">
+                <span>🎪 Show & Juegos: $220 / $250</span>
+                <span style="color: var(--gold-primary); font-weight: bold;">88%</span>
+              </div>
+              <div class="pillar-mini-row">
+                <span>🎁 Juguetes: $950 / $1,300</span>
+                <span style="color: var(--crimson-primary); font-weight: bold;">73%</span>
+              </div>
+            </div>
+
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 78%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 1.2rem;">
+              <strong>$1,450 recaudado</strong>
+              <span>Meta: $1,850</span>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%;" data-open-modal>
+              ❤️ Apoyar San Antonio
+            </button>
+          </div>
+
+          <!-- Comunidad 2 -->
+          <div class="community-card">
+            <div class="community-top">
+              <div>
+                <h3 class="community-name">Barrio Esperanza Alta</h3>
+                <span class="community-zone">📍 Sector Periférico • 150 Niños</span>
+              </div>
+              <span class="community-kids-badge">Caravana: 22 Dic</span>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Comunidad con alta densidad infantil. Se organizará chocolatada comunitaria en la plaza principal.
+            </p>
+
+            <div class="community-pillars-mini">
+              <div class="pillar-mini-row">
+                <span>☕ Chocolatada: $350 / $380</span>
+                <span style="color: var(--emerald); font-weight: bold;">92%</span>
+              </div>
+              <div class="pillar-mini-row">
+                <span>🎪 Show & Juegos: $280 / $300</span>
+                <span style="color: var(--gold-primary); font-weight: bold;">93%</span>
+              </div>
+              <div class="pillar-mini-row">
+                <span>🎁 Juguetes: $1,100 / $1,620</span>
+                <span style="color: var(--crimson-primary); font-weight: bold;">68%</span>
+              </div>
+            </div>
+
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 75%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 1.2rem;">
+              <strong>$1,730 recaudado</strong>
+              <span>Meta: $2,300</span>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%;" data-open-modal>
+              ❤️ Apoyar Esperanza Alta
+            </button>
+          </div>
+
+          <!-- Comunidad 3 -->
+          <div class="community-card">
+            <div class="community-top">
+              <div>
+                <h3 class="community-name">Aldea Valle Verde</h3>
+                <span class="community-zone">📍 Valle Agrícola • 85 Niños</span>
+              </div>
+              <span class="community-kids-badge">Caravana: 23 Dic</span>
+            </div>
+
+            <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 1rem;">
+              Hijos de trabajadores de huertos y parcelas. Se realizará entrega de juguetes educativos y teatro de títeres.
+            </p>
+
+            <div class="community-pillars-mini">
+              <div class="pillar-mini-row">
+                <span>☕ Chocolatada: $200 / $200</span>
+                <span style="color: var(--emerald); font-weight: bold;">100% ✓</span>
+              </div>
+              <div class="pillar-mini-row">
+                <span>🎪 Show & Juegos: $180 / $200</span>
+                <span style="color: var(--gold-primary); font-weight: bold;">90%</span>
+              </div>
+              <div class="pillar-mini-row">
+                <span>🎁 Juguetes: $620 / $850</span>
+                <span style="color: var(--crimson-primary); font-weight: bold;">73%</span>
+              </div>
+            </div>
+
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill" style="width: 80%;"></div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.82rem; margin-bottom: 1.2rem;">
+              <strong>$1,000 recaudado</strong>
+              <span>Meta: $1,250</span>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%;" data-open-modal>
+              ❤️ Apoyar Valle Verde
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CÓMO FUNCIONA LA COLECTA ENTRE AMIGOS
+         ========================================================================== -->
+    <section class="section" id="como-funciona">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-pretitle">Participación Colaborativa</span>
+          <h2 class="section-title">¿Cómo Funciona la Colecta entre Amigos?</h2>
+          <p class="section-desc">
+            Hacer el bien es más divertido y potente en grupo. En 4 sencillos pasos puedes financiar un pilar navideño.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <h3 class="step-title">Elige una Causa</h3>
+            <p class="step-desc">
+              Selecciona una localidad o comprométete a financiar un pilar específico (como la chocolatada o los juguetes).
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <h3 class="step-title">Crea tu Grupo</h3>
+            <p class="step-desc">
+              Asígnale un nombre a tu grupo solidario e invita a tus amigos o colegas de oficina mediante un enlace directo de WhatsApp.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <h3 class="step-title">Aporten Juntos</h3>
+            <p class="step-desc">
+              Cada integrante registra su aporte con QR o transferencia bancaria y ven cómo crece la barra de progreso grupal en tiempo real.
+            </p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-number">4</div>
+            <h3 class="step-title">Misión Cumplida</h3>
+            <p class="step-desc">
+              Reciben fotografías de la jornada comunitaria, el informe de compras auditado y su Certificado Digital de Honor.
+            </p>
+          </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 3.5rem;">
+          <a href="#donar" class="btn btn-gold" data-open-modal id="cta-start-group">
+            🚀 Iniciar Colecta Grupal Ahora
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRANSPARENCIA & CERTIFICADO DE HONOR
+         ========================================================================== -->
+    <section class="section section-bg-white" id="transparencia">
+      <div class="container">
+        <div class="transparency-box">
+          <div class="section-header" style="margin-bottom: 2.5rem;">
+            <span class="section-pretitle">Cuentas Claras</span>
+            <h2 class="section-title">Garantía de Transparencia Total</h2>
+            <p class="section-desc">
+              En Fundación Moderna creemos que la confianza se gana con hechos y evidencias verificables.
+            </p>
+          </div>
+
+          <div class="transparency-grid">
+            <div class="transparency-item">
+              <span class="transparency-icon">🧾</span>
+              <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Facturas y Recibos Públicos</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  Publicamos los comprobantes fiscales de compra mayorista de panetones, insumos lácteos y lotes de juguetes.
+                </p>
+              </div>
+            </div>
+
+            <div class="transparency-item">
+              <span class="transparency-icon">📜</span>
+              <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Certificado Digital de Honor</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  Cada persona o empresa participante recibe su diploma digital conmemorativo de impacto social para compartir.
+                </p>
+              </div>
+            </div>
+
+            <div class="transparency-item">
+              <span class="transparency-icon">📸</span>
+              <div>
+                <h4 style="font-size: 1.1rem; margin-bottom: 0.4rem;">Registro Fotográfico Respetuoso</h4>
+                <p style="font-size: 0.88rem; color: var(--text-muted);">
+                  Fotografías panorámicas del festejo, del show de payasos y la entrega general, protegiendo siempre la identidad infantil.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       MODAL INTERACTIVO DE DONACIÓN & DATOS BANCARIOS
+       ========================================================================== -->
+  <div class="modal-overlay" id="donation-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button class="modal-close" aria-label="Cerrar ventana emergente">&times;</button>
+      
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <span style="font-size: 2.5rem;">🎁</span>
+        <h3 id="modal-title" style="font-size: 1.4rem; color: var(--text-dark); margin-top: 0.5rem;">Sumar Aporte Navideño</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted);">
+          Tu donación se convierte directamente en chocolate caliente, juegos y regalos infantiles.
+        </p>
+      </div>
+
+      <div class="qr-box">
+        <div class="qr-placeholder">
+          <!-- SVG Ilustrativo del Código QR Interoperable -->
+          <svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Código QR de Donación">
+            <rect width="160" height="160" rx="8" fill="white"/>
+            <!-- Patrón QR Simulado de alta calidad -->
+            <rect x="16" y="16" width="40" height="40" rx="4" fill="#0F172A"/>
+            <rect x="24" y="24" width="24" height="24" rx="2" fill="white"/>
+            <rect x="30" y="30" width="12" height="12" fill="#0F172A"/>
+            <rect x="104" y="16" width="40" height="40" rx="4" fill="#0F172A"/>
+            <rect x="112" y="24" width="24" height="24" rx="2" fill="white"/>
+            <rect x="118" y="30" width="12" height="12" fill="#0F172A"/>
+            <rect x="16" y="104" width="40" height="40" rx="4" fill="#0F172A"/>
+            <rect x="24" y="112" width="24" height="24" rx="2" fill="white"/>
+            <rect x="30" y="118" width="12" height="12" fill="#0F172A"/>
+            <!-- Puntos de datos -->
+            <rect x="68" y="20" width="8" height="8" fill="#BE123C"/>
+            <rect x="80" y="20" width="8" height="8" fill="#0F172A"/>
+            <rect x="68" y="32" width="8" height="8" fill="#0F172A"/>
+            <rect x="80" y="44" width="8" height="8" fill="#D97706"/>
+            <rect x="68" y="56" width="8" height="8" fill="#0F172A"/>
+            <rect x="20" y="68" width="8" height="8" fill="#0F172A"/>
+            <rect x="44" y="68" width="8" height="8" fill="#0F172A"/>
+            <rect x="80" y="68" width="16" height="8" fill="#BE123C"/>
+            <rect x="104" y="68" width="8" height="8" fill="#0F172A"/>
+            <rect x="120" y="68" width="16" height="8" fill="#0F172A"/>
+            <rect x="68" y="92" width="16" height="8" fill="#0F172A"/>
+            <rect x="92" y="92" width="8" height="8" fill="#D97706"/>
+            <rect x="116" y="92" width="8" height="8" fill="#0F172A"/>
+            <rect x="68" y="116" width="8" height="8" fill="#0F172A"/>
+            <rect x="80" y="128" width="16" height="8" fill="#BE123C"/>
+            <rect x="104" y="116" width="16" height="16" fill="#0F172A"/>
+            <rect x="128" y="128" width="8" height="8" fill="#0F172A"/>
+          </svg>
+        </div>
+        <p style="font-size: 0.8rem; font-weight: 600; color: var(--text-dark); margin-top: 0.75rem;">
+          Escanea desde cualquier app bancaria o billetera móvil
+        </p>
+      </div>
+
+      <div style="background: var(--snow-soft); padding: 14px; border-radius: 12px; margin-bottom: 1rem;">
+        <div style="font-size: 0.82rem; color: var(--text-muted);">Cuenta Oficial Fundación Moderna:</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 4px;">
+          <strong style="font-size: 0.95rem; color: var(--text-dark);">0011-0123-0200894567</strong>
+          <button class="btn btn-outline" style="padding: 4px 12px; font-size: 0.78rem;" onclick="copiarAlPortapapeles('0011-0123-0200894567', this)">
+            Copiar
+          </button>
+        </div>
+      </div>
+
+      <p style="font-size: 0.78rem; color: var(--text-muted); text-align: center;">
+        ¿Deseas donar insumos físicos o juguetes nuevos? Escríbenos a <a href="mailto:contacto@fundacionmoderna.org" style="color: var(--crimson-primary); font-weight: bold;">contacto@fundacionmoderna.org</a> para coordinar el centro de acopio.
+      </p>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER OFICIAL
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="assets/images/logo_moderna.gif" alt="Fundación Moderna" style="height: 38px; border-radius: 6px; margin-bottom: 1rem; filter: brightness(1.05);">
+          <p class="footer-desc">
+            Organización solidaria dedicada a brindar alegría, chocolatadas y juguetes navideños a comunidades vulnerables mediante colectas transparentes entre amigos y empresas.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navegación</h5>
+          <ul class="footer-links">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#nosotros">Quiénes Somos</a></li>
+            <li><a href="#pilares">Los 3 Pilares</a></li>
+            <li><a href="#localidades">Comunidades 2026</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Transparencia</h5>
+          <ul class="footer-links">
+            <li><a href="#transparencia">Protección Infantil</a></li>
+            <li><a href="#transparencia">Rendición de Cuentas</a></li>
+            <li><a href="#transparencia">Certificados Oficiales</a></li>
+            <li><a href="https://fundacionmoderna.org/">Sitio Web Oficial</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contacto & Voluntariado</h5>
+          <p style="font-size: 0.88rem; margin-bottom: 0.75rem;">
+            Únete a la caravana como voluntario de entrega o coordinador de centro de acopio.
+          </p>
+          <a href="mailto:contacto@fundacionmoderna.org" class="btn btn-outline" style="color: #fff; border-color: rgba(255,255,255,0.3); font-size: 0.85rem; padding: 8px 16px;">
+            ✉️ contacto@fundacionmoderna.org
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 <strong>Fundación Moderna</strong> (fundacionmoderna.org). Todos los derechos reservados.
+        </div>
+        <div style="color: #64748b;">
+          Desarrollado con ❤️ y espíritu navideño para la niñez.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -4,6 +4,7 @@ import '../core/app_theme.dart';
 import '../core/widgets/festive_badge.dart';
 import '../core/widgets/progress_stat_bar.dart';
 import '../view_models/foundation_view_model.dart';
+import 'info_fundacion_screen.dart';
 import 'localidad_detail_screen.dart';
 import 'nueva_colecta_dialog.dart';
 
@@ -26,29 +27,75 @@ class HomeCampaignsScreen extends StatelessWidget {
           appBar: AppBar(
             title: Row(
               children: [
-                const Text('🎄 ', style: TextStyle(fontSize: 20)),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Fundación Moderna',
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: Image.asset(
+                    'assets/images/logo_moderna.gif',
+                    height: 28,
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const SizedBox.shrink(),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                RichText(
+                  text: const TextSpan(
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.textHeading,
                     ),
-                    Text(
-                      'Misión Navidad por Localidades',
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: AppTheme.rubyRed,
-                        fontWeight: FontWeight.w600,
+                    children: [
+                      TextSpan(text: 'Fundación moderna'),
+                      TextSpan(
+                        text: '.',
+                        style: TextStyle(
+                          color: AppTheme.rubyRed,
+                          fontSize: 20,
+                        ),
                       ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                  decoration: BoxDecoration(
+                    color: AppTheme.rubyLightBg,
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: AppTheme.rubyRed.withValues(alpha: 0.3),
                     ),
-                  ],
+                  ),
+                  child: const Text(
+                    'Misión Navidad',
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: AppTheme.rubyRed,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),
             actions: [
               IconButton(
-                icon: const Icon(Icons.favorite_border, color: AppTheme.rubyRed),
+                icon: const Icon(Icons.info_outline, color: AppTheme.rubyRed),
+                tooltip: 'Conoce Fundación Moderna',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (ctx) =>
+                          InfoFundacionScreen(viewModel: viewModel),
+                    ),
+                  );
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.favorite,
+                    color: AppTheme.rubyRed),
                 tooltip: 'Padrinos activos',
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -66,31 +113,31 @@ class HomeCampaignsScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             children: [
-              // Hero Banner Global de la Campaña Navideña
+              // 🎄 Hero Banner Principal Festivo
               Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(22),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF8B0000), Color(0xFFC41E3A)],
+                    colors: [AppTheme.rubyRed, AppTheme.brightRuby],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(22),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.rubyRed.withValues(alpha: 0.25),
-                      blurRadius: 15,
-                      offset: const Offset(0, 6),
+                      color: AppTheme.rubyRed.withValues(alpha: 0.28),
+                      blurRadius: 18,
+                      offset: const Offset(0, 8),
                     ),
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'Misión Navideña 2026 ⭐',
                           style: TextStyle(
                             color: Colors.white,
@@ -98,26 +145,48 @@ class HomeCampaignsScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        FestiveBadge(
-                          text: 'Caravana Activa',
-                          color: Colors.white,
-                          textColor: AppTheme.rubyRed,
-                          icon: Icons.local_shipping,
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Row(
+                            children: [
+                              Icon(Icons.local_shipping,
+                                  size: 14, color: AppTheme.rubyRed),
+                              SizedBox(width: 4),
+                              Text(
+                                'Caravana Activa',
+                                style: TextStyle(
+                                  color: AppTheme.rubyRed,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 11,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                      'Llevamos Chocolatada, Juegos & Juguetes a comunidades vulnerables con amigos solidarios.',
-                      style: TextStyle(color: Colors.white70, fontSize: 13),
+                      'Llevamos Chocolatada, Juegos & Juguetes a comunidades vulnerables junto a amigos solidarios.',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        height: 1.4,
+                      ),
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 18),
 
-                    // Resumen numérico rápido
+                    // Resumen numérico de la web
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        _buildKpiMini('Niños', '${viewModel.totalNinosBeneficiados}', '👶'),
+                        _buildKpiMini('Niños',
+                            '${viewModel.totalNinosBeneficiados}', '👶'),
                         _buildKpiMini(
                           'Chocolatada',
                           '\$${viewModel.totalChocolatadaRecaudada.toStringAsFixed(0)}',
@@ -130,14 +199,14 @@ class HomeCampaignsScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 18),
 
-                    // Barra de progreso general
+                    // Barra de progreso general sobre fondo blanco traslúcido
                     ProgressStatBar(
                       label: 'Recaudación Comunitaria Total',
                       current: viewModel.totalMontoRecaudadoGeneral,
                       target: viewModel.metaTotalCampana,
-                      progressColor: AppTheme.festiveGold,
+                      progressColor: Colors.white,
                     ),
                   ],
                 ),
@@ -145,27 +214,25 @@ class HomeCampaignsScreen extends StatelessWidget {
 
               const SizedBox(height: 16),
 
-              // Banner ético de Protección y Dignidad Infantil
+              // Banner ético de Protección Infantil y Enfoque Comunitario
               Container(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
-                  color: AppTheme.pineGreen.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(
-                    color: AppTheme.pineGreen.withValues(alpha: 0.2),
-                  ),
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(14),
+                  border: Border.all(color: AppTheme.borderLight),
                 ),
                 child: const Row(
                   children: [
-                    Text('🛡️', style: TextStyle(fontSize: 20)),
-                    SizedBox(width: 10),
+                    Text('🛡️', style: TextStyle(fontSize: 22)),
+                    SizedBox(width: 12),
                     Expanded(
                       child: Text(
-                        'Por protección infantil y dignidad, apoyamos por Localidades en lugar de publicar datos individuales. ¡Ningún niño se queda sin regalo!',
+                        'Por dignidad y protección infantil, apoyamos por Localidades en lugar de publicar datos de niños individuales. ¡Llevamos alegría a toda la comunidad!',
                         style: TextStyle(
-                          fontSize: 12,
-                          color: AppTheme.pineGreen,
-                          fontWeight: FontWeight.w600,
+                          fontSize: 12.5,
+                          color: AppTheme.textBody,
+                          height: 1.35,
                         ),
                       ),
                     ),
@@ -178,8 +245,9 @@ class HomeCampaignsScreen extends StatelessWidget {
               // Buscador de Localidades
               TextField(
                 decoration: InputDecoration(
-                  hintText: 'Buscar localidad o zona rural...',
-                  prefixIcon: const Icon(Icons.search, color: AppTheme.textMuted),
+                  hintText: 'Buscar localidad o comunidad...',
+                  prefixIcon:
+                      const Icon(Icons.search, color: AppTheme.rubyRed),
                   suffixIcon: viewModel.searchQuery.isNotEmpty
                       ? IconButton(
                           icon: const Icon(Icons.clear),
@@ -201,17 +269,24 @@ class HomeCampaignsScreen extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.textPrimary,
+                      color: AppTheme.textHeading,
                     ),
                   ),
                   TextButton.icon(
+                    style: TextButton.styleFrom(
+                      foregroundColor: AppTheme.rubyRed,
+                    ),
                     icon: const Icon(Icons.add, size: 18),
-                    label: const Text('Crear Colecta'),
+                    label: const Text(
+                      'Crear Colecta',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     onPressed: () {
                       showModalBottomSheet(
                         context: context,
                         isScrollControlled: true,
-                        builder: (ctx) => NuevaColectaDialog(viewModel: viewModel),
+                        builder: (ctx) =>
+                            NuevaColectaDialog(viewModel: viewModel),
                       );
                     },
                   ),
@@ -236,15 +311,15 @@ class HomeCampaignsScreen extends StatelessWidget {
 
   Widget _buildKpiMini(String label, String value, String emoji) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(10),
+        color: Colors.white.withValues(alpha: 0.2),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         children: [
           Text(emoji, style: const TextStyle(fontSize: 18)),
-          const SizedBox(width: 6),
+          const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -253,12 +328,12 @@ class HomeCampaignsScreen extends StatelessWidget {
                 style: const TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 13,
+                  fontSize: 14,
                 ),
               ),
               Text(
                 label,
-                style: const TextStyle(color: Colors.white70, fontSize: 10),
+                style: const TextStyle(color: Colors.white, fontSize: 10.5),
               ),
             ],
           ),
@@ -296,11 +371,12 @@ class HomeCampaignsScreen extends StatelessWidget {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: AppTheme.pineGreen.withValues(alpha: 0.1),
+                      color: AppTheme.greenLightBg,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Center(
-                      child: Text(loc.emoji, style: const TextStyle(fontSize: 26)),
+                      child:
+                          Text(loc.emoji, style: const TextStyle(fontSize: 26)),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -313,20 +389,21 @@ class HomeCampaignsScreen extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
-                            color: AppTheme.textPrimary,
+                            color: AppTheme.textHeading,
                           ),
                         ),
                         const SizedBox(height: 2),
                         Text(
                           loc.departamentoZona,
-                          style: const TextStyle(fontSize: 12, color: AppTheme.textMuted),
+                          style: const TextStyle(
+                              fontSize: 12, color: AppTheme.textMuted),
                         ),
                       ],
                     ),
                   ),
                   FestiveBadge(
                     text: '${loc.cantidadNinosEstimados} Niños',
-                    color: AppTheme.pineGreen.withValues(alpha: 0.12),
+                    backgroundColor: AppTheme.greenLightBg,
                     textColor: AppTheme.pineGreen,
                     icon: Icons.child_care,
                   ),
@@ -339,17 +416,21 @@ class HomeCampaignsScreen extends StatelessWidget {
                 loc.descripcionComunidad,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(fontSize: 12.5, color: Color(0xFF4A5568)),
+                style: const TextStyle(
+                  fontSize: 12.5,
+                  color: AppTheme.textBody,
+                  height: 1.4,
+                ),
               ),
 
               const SizedBox(height: 14),
 
               // Desglose de los 3 Pilares Comunitarios
               Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: AppTheme.backgroundLight,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
                   children: [
@@ -358,7 +439,7 @@ class HomeCampaignsScreen extends StatelessWidget {
                       name: 'Chocolatada',
                       current: loc.recaudadoChocolatada,
                       target: loc.metaChocolatada,
-                      color: const Color(0xFF8B4513),
+                      color: AppTheme.chocoColor,
                     ),
                     const SizedBox(height: 6),
                     _buildPilarRow(
@@ -366,7 +447,7 @@ class HomeCampaignsScreen extends StatelessWidget {
                       name: 'Juegos & Show',
                       current: loc.recaudadoJuegos,
                       target: loc.metaJuegos,
-                      color: const Color(0xFFD97706),
+                      color: AppTheme.juegosColor,
                     ),
                     const SizedBox(height: 6),
                     _buildPilarRow(
@@ -374,7 +455,7 @@ class HomeCampaignsScreen extends StatelessWidget {
                       name: 'Lote Juguetes',
                       current: loc.recaudadoJuguetes,
                       target: loc.metaJuguetes,
-                      color: AppTheme.rubyRed,
+                      color: AppTheme.juguetesColor,
                     ),
                   ],
                 ),
@@ -390,7 +471,7 @@ class HomeCampaignsScreen extends StatelessWidget {
                 progressColor: AppTheme.pineGreen,
               ),
 
-              const SizedBox(height: 12),
+              const SizedBox(height: 14),
 
               // Footer con botones de acción
               Row(
@@ -398,14 +479,16 @@ class HomeCampaignsScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Caravana: ${loc.fechaCaravana.day}/${loc.fechaCaravana.month}',
-                    style: const TextStyle(fontSize: 12, color: AppTheme.textMuted),
+                    style: const TextStyle(
+                        fontSize: 12, color: AppTheme.textMuted),
                   ),
                   Row(
                     children: [
                       OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                          minimumSize: const Size(0, 32),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 14, vertical: 8),
+                          minimumSize: const Size(0, 34),
                         ),
                         onPressed: () {
                           showModalBottomSheet(
@@ -417,13 +500,16 @@ class HomeCampaignsScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Text('Colectar con Amigos', style: TextStyle(fontSize: 11)),
+                        child: const Text('Colectar',
+                            style: TextStyle(fontSize: 12)),
                       ),
                       const SizedBox(width: 8),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          minimumSize: const Size(0, 32),
+                          backgroundColor: AppTheme.rubyRed,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          minimumSize: const Size(0, 34),
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -436,7 +522,8 @@ class HomeCampaignsScreen extends StatelessWidget {
                             ),
                           );
                         },
-                        child: const Text('Ver Ficha', style: TextStyle(fontSize: 11)),
+                        child: const Text('Ver Ficha',
+                            style: TextStyle(fontSize: 12)),
                       ),
                     ],
                   ),
@@ -456,7 +543,8 @@ class HomeCampaignsScreen extends StatelessWidget {
     required double target,
     required Color color,
   }) {
-    final pct = target <= 0 ? 0.0 : (current / target > 1.0 ? 1.0 : current / target);
+    final pct =
+        target <= 0 ? 0.0 : (current / target > 1.0 ? 1.0 : current / target);
     return Row(
       children: [
         Text(emoji, style: const TextStyle(fontSize: 14)),

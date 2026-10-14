@@ -56,14 +56,14 @@ class LocalidadDetailScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF0F5132), Color(0xFF198754)],
+                    colors: [AppTheme.rubyRed, AppTheme.brightRuby],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.pineGreen.withValues(alpha: 0.25),
+                      color: AppTheme.rubyRed.withValues(alpha: 0.25),
                       blurRadius: 16,
                       offset: const Offset(0, 6),
                     ),
